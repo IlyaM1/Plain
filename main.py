@@ -42,9 +42,10 @@ class newRowDialog(QtWidgets.QDialog):
         self.setLayout(self.layout)
 
     def saveRow(self):
-        # self.noteDict[self.layout.nameLayout.newLabel.text()] = self.layout.nameLayout.newInput.text()
-        print((self.nameLayout.newLabel.text()))
+        self.noteDict[self.nameLayout.newLabel.text()] = self.nameLayout.newInput.text()
+        self.noteDict[self.contentLayout.newLabel.text()] = self.contentLayout.newInput.text()
         print("2: ", self.noteDict)
+        self.close()
 
 
 class newNoteDialog(QtWidgets.QDialog):
