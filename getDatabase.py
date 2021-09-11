@@ -1,20 +1,23 @@
-def getDatabase():
-    # Provide the mongodb atlas url to connect python to mongodb using pymongo
-    CONNECTION_STRING = ""
+class Database():
+    __instance__ = None
 
-    with open("token.cfg", "r") as file:
-        CONNECTION_STRING = file.read()
+    def __init__(self):
+        with open("token.cfg", "r") as file:
+            self.CONNECTION_STRING = file.read()
 
-    # Create a connection using MongoClient. You can import MongoClient or use pymongo.MongoClient
-    from pymongo import MongoClient
-    client = MongoClient(CONNECTION_STRING)
+        from pymongo import MongoClient
+        self.client = MongoClient(self.CONNECTION_STRING)
 
-    # Create the database for our example (we will use the same database throughout the tutorial
-    return client['user_shopping_list']
+        return self.client['user_shopping_list']
+
+    @staticmethod
+    def get_instance():
+        if Database.__instance__ is None:
+            Database.__instance__ = Database()
+
+        return Database.__instance__
 
 
-# This is added so that many files can reuse the function get_database()
 if __name__ == "__main__":
-    # Get the database
-    dbname = getDatabase()
+    db = Database.get_instance()
     print("Connected to MongoDB Atlas")
