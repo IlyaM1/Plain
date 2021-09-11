@@ -1,10 +1,10 @@
 from PyQt5 import QtWidgets, QtGui, QtCore, Qt
 from des import Ui_MainWindow  # импорт нашего сгенерированного файла
-from getDatabase import getDatabase
+from getDatabase import Database
 import sys
 
 
-class newRow(QtWidgets.QHBoxLayout):
+class NewRow(QtWidgets.QHBoxLayout):
     def __init__(self, text1):
         super().__init__()
         print("yes")
@@ -17,8 +17,25 @@ class newRow(QtWidgets.QHBoxLayout):
         self.addWidget(self.newInput)
 
 
+class User():
+    def __init__(self):
+        self.notes = {}
 
-class newRowDialog(QtWidgets.QDialog):
+
+class Note():
+    def __init__(self, name, content):
+        self.name = name
+        self.content = content
+
+
+"""
+name:""
+content: ""
+data: ""
+"""
+
+
+class NewRowDialog(QtWidgets.QDialog):
     def __init__(self, noteDict):
         super().__init__()
 
@@ -28,27 +45,27 @@ class newRowDialog(QtWidgets.QDialog):
         self.layout = QtWidgets.QVBoxLayout()
         self.noteDict = noteDict
 
-        self.nameLayout = newRow("Name: ")
+        self.nameLayout = NewRow("Name: ")
         self.layout.addLayout(self.nameLayout)
 
-        self.contentLayout = newRow("Content: ")
+        self.contentLayout = NewRow("Content: ")
         self.layout.addLayout(self.contentLayout)
 
         button = QtWidgets.QPushButton()
         button.setText('Сохранить')
-        button.clicked.connect(self.saveRow)
+        button.clicked.connect(self.new_save_row)
         self.layout.addWidget(button)
 
         self.setLayout(self.layout)
 
-    def saveRow(self):
+    def save_row(self):
         self.noteDict[self.nameLayout.newLabel.text()] = self.nameLayout.newInput.text()
         self.noteDict[self.contentLayout.newLabel.text()] = self.contentLayout.newInput.text()
         print("2: ", self.noteDict)
         self.close()
 
 
-class newNoteDialog(QtWidgets.QDialog):
+class NewNoteDialog(QtWidgets.QDialog):
     def __init__(self, noteDict):
         super().__init__()
         self.title = 'Тест'
@@ -57,17 +74,12 @@ class newNoteDialog(QtWidgets.QDialog):
         self.layout = QtWidgets.QVBoxLayout()
         self.noteDict = noteDict
 
-        nameLayout = self.newRow("Name")
+        nameLayout = NewRow("Name")
         self.layout.addLayout(nameLayout)
 
         button = QtWidgets.QPushButton()
         button.setText('Добавить новое поле')
-        button.clicked.connect(self.newSaveRow)
-        self.layout.addWidget(button)
-
-        button = QtWidgets.QPushButton()
-        button.setText('Добавить новую запись')
-        button.clicked.connect(self.newNoteClick)
+        button.clicked.connect(self.new_save_row)
         self.layout.addWidget(button)
 
         button = QtWidgets.QPushButton()
@@ -77,22 +89,10 @@ class newNoteDialog(QtWidgets.QDialog):
 
         self.setLayout(self.layout)
 
-    def newRow(self, text1):
-        newLayout = QtWidgets.QHBoxLayout()
-
-        newLabel = QtWidgets.QLabel(text1)
-        newInput = QtWidgets.QLineEdit("")
-
-        newLayout.addWidget(newLabel)
-        newLayout.addWidget(newInput)
-
-        # self.addWidget(newLayout)
-        return newLayout
-
-    def newSaveRow(self):
+    def new_save_row(self):
         # newNote = QtWidgets.QListWidgetItem()
         print(self.noteDict)
-        dialog = newRowDialog(self.noteDict)
+        dialog = NewRowDialog(self.noteDict)
         print(self.noteDict)
         dialog.show()
         dialog.exec()
@@ -103,7 +103,7 @@ class newNoteDialog(QtWidgets.QDialog):
 
     def newNoteClick(self):
         newNote = QtWidgets.QListWidgetItem()
-        dialog = newNoteDialog(self.noteDict)
+        dialog = NewNoteDialog(self.noteDict)
 
         dialog.show()
         dialog.exec()
@@ -113,31 +113,32 @@ class newNoteDialog(QtWidgets.QDialog):
         self.ui.listWidget.addItem(newNote)
 
 
-class myWindow(QtWidgets.QMainWindow):
+class Main_window(QtWidgets.QMainWindow):
     def __init__(self):
-        super(myWindow, self).__init__()
+        super(Main_window, self).__init__()
+        self.db = Database.get_instance()
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
         self.noteDict = {}
-        self.ui.pushButton.clicked.connect(self.newNoteClick)
+        self.ui.pushButton.clicked.connect(self.new_note_click)
 
-    def newNoteClick(self):
-        newNote = QtWidgets.QListWidgetItem()
-        dialog = newNoteDialog(self.noteDict)
+    def new_note_click(self):
+        new_note = QtWidgets.QListWidgetItem()
+        dialog = NewNoteDialog(self.noteDict)
 
         dialog.show()
         dialog.exec()
 
-        newNote.setText("id: content")
-        newNote.setFont(QtGui.QFont("Times New Roman", 32))
-        self.ui.listWidget.addItem(newNote)
+        new_note.setText("id: content")
+        new_note.setFont(QtGui.QFont("Times New Roman", 32))
+        self.ui.listWidget.addItem(new_note)
 
 
-dbname = getDatabase()
+# dbname = getDatabase()
 print("Connected to MongoDB Atlas")
 
 app = QtWidgets.QApplication([])
-application = myWindow()
+application = Main_window()
 application.show()
 
 sys.exit(app.exec())
