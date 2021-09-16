@@ -8,12 +8,12 @@ class Database():
         from pymongo import MongoClient
         self.client = MongoClient(self.CONNECTION_STRING)
 
-        return self.client['user_shopping_list']
+        # return self.client['user_shopping_list']
 
     @staticmethod
     def get_instance():
         if Database.__instance__ is None:
-            Database.__instance__ = Database()
+            Database.__instance__ = Database().client
 
         return Database.__instance__
 
