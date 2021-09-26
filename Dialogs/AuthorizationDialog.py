@@ -2,11 +2,13 @@ from PyQt5 import QtWidgets
 from Widgets.NewRow import NewRow
 from Database import Database
 from Dialogs.SignUpDialog import SignUpDialog
+from Structures.User import User
 
 class AuthorizationDialog(QtWidgets.QDialog):
     def __init__(self):
         super().__init__()
 
+        self.user = None
         self.db = Database.get_instance()
         self.layoutAuth = QtWidgets.QVBoxLayout()
 
@@ -31,9 +33,9 @@ class AuthorizationDialog(QtWidgets.QDialog):
         for user in all_users:
             if self.login.newInput.text() == user['username'] and self.password.newInput.text() == user['password']:
                 print("Entered")
-                print(user)
-            else:
-                print("Wrong Password")
+                self.user = User(self.login.newInput.text(), self.password.newInput.text())
+                self.exit()
+        print("Wrong Password")
 
     def signUpButtonPush(self):
         sign_up = SignUpDialog()

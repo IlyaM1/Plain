@@ -9,12 +9,10 @@ from Dialogs.NewNoteDialog import NewNoteDialog
 
 
 class Main_window(QtWidgets.QMainWindow):
-    def __init__(self):
+    def __init__(self, user):
         super(Main_window, self).__init__()
-        print(1)
-        auth = AuthorizationDialog()
-        auth.show()
-        auth.exec()
+        self.user = user
+        print(self.user.username)
         self.db = Database.get_instance()
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
@@ -34,7 +32,10 @@ class Main_window(QtWidgets.QMainWindow):
 
 
 app = QtWidgets.QApplication([])
-application = Main_window()
+auth = AuthorizationDialog()
+auth.show()
+auth.exec()
+application = Main_window(auth.user)
 application.show()
 
 sys.exit(app.exec())
