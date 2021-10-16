@@ -12,18 +12,18 @@ class NewNoteDialog(QtWidgets.QDialog):
         self.layout = QtWidgets.QVBoxLayout()
         self.noteDict = noteDict
 
-        nameLayout = NewRow("Name")
-        self.layout.addLayout(nameLayout)
+        self.nameLayout = NewRow("Name")
+        self.layout.addLayout(self.nameLayout)
 
-        button = QtWidgets.QPushButton()
-        button.setText('Добавить новое поле')
-        button.clicked.connect(self.new_save_row)
-        self.layout.addWidget(button)
+        self.button_new_row = QtWidgets.QPushButton()
+        self.button_new_row.setText('Добавить новое поле')
+        self.button_new_row.clicked.connect(self.new_save_row)
+        self.layout.addWidget(self.button_new_row)
 
-        button = QtWidgets.QPushButton()
-        button.setText('Сохранить')
-        # button.clicked.connect(self.newNoteClick)
-        self.layout.addWidget(button)
+        button_save = QtWidgets.QPushButton()
+        button_save.setText('Сохранить')
+        button_save.clicked.connect(self.save_note)
+        self.layout.addWidget(button_save)
 
         self.setLayout(self.layout)
 
@@ -39,13 +39,16 @@ class NewNoteDialog(QtWidgets.QDialog):
         # newNote.setFont(QtGui.QFont("Times New Roman", 32))
         # self.layout.addWidget(newNote)
 
-    def newNoteClick(self):
-        newNote = QtWidgets.QListWidgetItem()
-        dialog = NewNoteDialog(self.noteDict)
-
-        dialog.show()
-        dialog.exec()
-
-        newNote.setText("id: content")
-        newNote.setFont(QtGui.QFont("Times New Roman", 32))
-        self.ui.listWidget.addItem(newNote)
+    def save_note(self):
+        # newNote = QtWidgets.QListWidgetItem()
+        # dialog = NewNoteDialog(self.noteDict)
+        #
+        # dialog.show()
+        # dialog.exec()
+        #
+        # newNote.setText("id: content")
+        # newNote.setFont(QtGui.QFont("Times New Roman", 32))
+        # self.ui.listWidget.addItem(newNote)
+        self.noteDict.append({'name': self.nameLayout.newInput.text()})
+        print("Exited New Note")
+        self.close()

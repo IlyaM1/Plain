@@ -34,7 +34,7 @@ class AuthorizationDialog(QtWidgets.QDialog):
             if self.login.newInput.text() == user['username'] and self.password.newInput.text() == user['password']:
                 print("Entered")
                 self.user = User(self.login.newInput.text(), self.password.newInput.text())
-                self.exit()
+                self.close()
         print("Wrong Password")
 
     def signUpButtonPush(self):
