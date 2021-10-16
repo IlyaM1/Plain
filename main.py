@@ -21,21 +21,29 @@ class Main_window(QtWidgets.QMainWindow):
 
     def new_note_click(self):
         new_note = QtWidgets.QListWidgetItem()
+        checkDict  = self.noteDict
         dialog = NewNoteDialog(self.noteDict)
 
         dialog.show()
         dialog.exec()
 
-        new_note.setText("id: content")
-        new_note.setFont(QtGui.QFont("Times New Roman", 32))
-        self.ui.listWidget.addItem(new_note)
+        if dialog.noteDict != checkDict:
+
+            print("Not same")
+        print("Same")
+        self.noteDict = dialog.noteDict
+        print(self.noteDict)
+        # new_note.setText("id: content")
+        # new_note.setFont(QtGui.QFont("Times New Roman", 32))
+        # self.ui.listWidget.addItem(new_note)
 
 
 app = QtWidgets.QApplication([])
 auth = AuthorizationDialog()
 auth.show()
 auth.exec()
+print("Start Main Window")
+print(auth.user)
 application = Main_window(auth.user)
 application.show()
-
 sys.exit(app.exec())
