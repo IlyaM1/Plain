@@ -8,9 +8,9 @@ from Dialogs.AuthorizationDialog import AuthorizationDialog
 from Dialogs.NewNoteDialog import NewNoteDialog
 
 
-class Main_window(QtWidgets.QMainWindow):
+class main_window(QtWidgets.QMainWindow):
     def __init__(self, user):
-        super(Main_window, self).__init__()
+        super(main_window, self).__init__()
         self.user = user
         print(self.user.username)
         self.db = Database.get_instance()
@@ -22,14 +22,14 @@ class Main_window(QtWidgets.QMainWindow):
     def new_note_click(self):
         new_note = QtWidgets.QListWidgetItem()
         checkDict  = self.noteDict
-        dialog = NewNoteDialog(self.noteDict)
+        dialog = NewNoteDialog()
 
         dialog.show()
         dialog.exec()
 
         if dialog.noteDict != checkDict:
-
             print("Not same")
+
         print("Same")
         self.noteDict = dialog.noteDict
         print(self.noteDict)
@@ -44,6 +44,6 @@ auth.show()
 auth.exec()
 print("Start Main Window")
 print(auth.user)
-application = Main_window(auth.user)
+application = main_window(auth.user)
 application.show()
 sys.exit(app.exec())
