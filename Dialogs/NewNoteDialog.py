@@ -12,6 +12,7 @@ class NewNoteDialog(QtWidgets.QDialog):
         self.setFont(QtGui.QFont('Times', 13))
         self.layout = QtWidgets.QVBoxLayout()
         self.noteDict = {"name": ""}
+        self.amountOfRows = 1
 
         self.nameLayout = NewRow("Name")
         self.layout.addLayout(self.nameLayout)
@@ -36,26 +37,15 @@ class NewNoteDialog(QtWidgets.QDialog):
         dialog.show()
         dialog.exec()
         self.noteDict[dialog.name] = dialog.content
-        print("")
+        print("Finished new row dialog and saved name + content")
         new_row = NewRowContent(dialog.name, dialog.content)
-        self.layout.addWidget(new_row)
+        print("Finished new row widget")
+        self.layout.insertLayout(self.amountOfRows, new_row)
+        print("Added widget to layout")
+        self.amountOfRows += 1
 
-
-        # newNote.setText("id: content")
-        # newNote.setFont(QtGui.QFont("Times New Roman", 32))
-        # self.layout.addWidget(newNote)
 
     def save_note(self):
-        # newNote = QtWidgets.QListWidgetItem()
-        # dialog = NewNoteDialog(self.noteDict)
-        #
-        # dialog.show()
-        # dialog.exec()
-        #
-        # newNote.setText("id: content")
-        # newNote.setFont(QtGui.QFont("Times New Roman", 32))
-        # self.ui.listWidget.addItem(newNote)
-        # self.noteDict.append({'name': self.nameLayout.newInput.text()})
         name_text = self.nameLayout.newInput.text()
         if not name_text or name_text == '':
             NewNoteDialog.__show_empty_message_error()
@@ -74,7 +64,4 @@ class NewNoteDialog(QtWidgets.QDialog):
         msgBox.setStandardButtons(QMessageBox.Ok)
         msgBox.show()
         msgBox.exec()
-
-    # @staticmethod
-    # def __new_with_content(name, content):
 

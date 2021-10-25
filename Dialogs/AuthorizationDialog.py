@@ -32,7 +32,6 @@ class AuthorizationDialog(QtWidgets.QDialog):
         all_users = self.db.User.User.find()
         for user in all_users:
             if self.login.newInput.text() == user['username'] and self.password.newInput.text() == user['password']:
-                print("Entered")
                 self.user = User(self.login.newInput.text(), self.password.newInput.text())
                 self.close()
         print("Wrong Password")
