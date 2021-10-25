@@ -7,7 +7,7 @@ class NewRowContent(QtWidgets.QHBoxLayout):
         # self.newLayout = QtWidgets.QHBoxLayout()
 
         self.newLabelName = QtWidgets.QLabel(name)
-        self.newLabelContent = QtWidgets.QLabel(content)
+        self.newLabelContent = QtWidgets.QLineEdit(content)
 
         self.addWidget(self.newLabelName)
         self.addWidget(self.newLabelContent)
