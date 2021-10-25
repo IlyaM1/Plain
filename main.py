@@ -16,19 +16,16 @@ class main_window(QtWidgets.QMainWindow):
         self.db = Database.get_instance()
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
-        self.noteDict = {}
+        self.dict = {}
         self.ui.pushButton.clicked.connect(self.new_note_click)
 
     def new_note_click(self):
         new_note = QtWidgets.QListWidgetItem()
-        checkDict  = self.noteDict
         dialog = NewNoteDialog()
 
         dialog.show()
         dialog.exec()
 
-        if dialog.noteDict != checkDict:
-            print("Not same")
 
         print("Same")
         self.noteDict = dialog.noteDict

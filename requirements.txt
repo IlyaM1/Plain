@@ -1,0 +1,6 @@
+bson==0.5.10
+dnspython==2.1.0
+pymongo==3.12.1
+PyQt5==5.9.1
+sip==4.19.8
+virtualenv==20.9.0
