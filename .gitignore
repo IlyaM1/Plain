@@ -1,2 +1,4 @@
 venv
 token.cfg
+__pycache__
+.idea
