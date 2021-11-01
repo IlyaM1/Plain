@@ -1,4 +1,4 @@
-class Database():
+class Database:
     __instance__ = None
 
     def __init__(self):

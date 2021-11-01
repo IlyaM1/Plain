@@ -12,7 +12,6 @@ class main_window(QtWidgets.QMainWindow):
     def __init__(self, user):
         super(main_window, self).__init__()
         self.user = user
-        print(self.user.username)
         self.db = Database.get_instance()
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
@@ -26,21 +25,14 @@ class main_window(QtWidgets.QMainWindow):
         dialog.show()
         dialog.exec()
 
-
-        print("Same")
-        self.noteDict = dialog.noteDict
-        print(self.noteDict)
-        # new_note.setText("id: content")
-        # new_note.setFont(QtGui.QFont("Times New Roman", 32))
-        # self.ui.listWidget.addItem(new_note)
+        new_note_dict = dialog.noteDict
+        self.db.User[self.user.username].insert_one(new_note_dict)
 
 
 app = QtWidgets.QApplication([])
 auth = AuthorizationDialog()
 auth.show()
 auth.exec()
-print("Start Main Window")
-print(auth.user)
 application = main_window(auth.user)
 application.show()
 sys.exit(app.exec())

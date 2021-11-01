@@ -29,5 +29,4 @@ class NewRowDialog(QtWidgets.QDialog):
     def save_row(self):
         self.name = self.nameLayout.newInput.text()
         self.content = self.contentLayout.newInput.text()
-        print(self.name, self.content)
         self.close()

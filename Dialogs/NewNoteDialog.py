@@ -4,6 +4,7 @@ from Dialogs.NewRowDialog import NewRowDialog
 from Widgets.NewRowContent import NewRowContent
 from PyQt5.QtWidgets import QMessageBox
 
+
 class NewNoteDialog(QtWidgets.QDialog):
     def __init__(self):
         super().__init__()
@@ -30,20 +31,13 @@ class NewNoteDialog(QtWidgets.QDialog):
         self.setLayout(self.layout)
 
     def new_save_row(self):
-        # newNote = QtWidgets.QListWidgetItem()
-        print(self.noteDict)
         dialog = NewRowDialog()
-        print(self.noteDict)
         dialog.show()
         dialog.exec()
         self.noteDict[dialog.name] = dialog.content
-        print("Finished new row dialog and saved name + content")
         new_row = NewRowContent(dialog.name, dialog.content)
-        print("Finished new row widget")
         self.layout.insertLayout(self.amountOfRows, new_row)
-        print("Added widget to layout")
         self.amountOfRows += 1
-
 
     def save_note(self):
         name_text = self.nameLayout.newInput.text()
@@ -51,9 +45,7 @@ class NewNoteDialog(QtWidgets.QDialog):
             NewNoteDialog.__show_empty_message_error()
         else:
             self.noteDict["name"] = name_text
-        print("Exited New Note")
         self.close()
-
 
     @staticmethod
     def __show_empty_message_error():
@@ -64,4 +56,3 @@ class NewNoteDialog(QtWidgets.QDialog):
         msgBox.setStandardButtons(QMessageBox.Ok)
         msgBox.show()
         msgBox.exec()
-

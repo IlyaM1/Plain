@@ -19,7 +19,6 @@ class SignUpDialog(QtWidgets.QDialog):
         self.repeat_password = NewRow("Repeat Password")
         self.layoutAuth.addLayout(self.repeat_password)
 
-
         buttonSign = QtWidgets.QPushButton("Sign Up")
         buttonSign.clicked.connect(self.signUpButtonPush)
         self.layoutAuth.addWidget(buttonSign)
@@ -32,8 +31,7 @@ class SignUpDialog(QtWidgets.QDialog):
                 'username': self.login.newInput.text(),
                 'password': self.password.newInput.text()
             }
-            print(new_user)
             new_user_id = self.db.User.User.insert_one(new_user)
-            self.db.User.User.createCollection(new_user['username'])
-            print("New User")
+            # self.db.User.createCollection(new_user['username'])
+            self.db.User[new_user['username']].insert_one({'data': '1.1.1980'})
             self.close()

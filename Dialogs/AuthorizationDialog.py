@@ -4,6 +4,7 @@ from Database import Database
 from Dialogs.SignUpDialog import SignUpDialog
 from Structures.User import User
 
+
 class AuthorizationDialog(QtWidgets.QDialog):
     def __init__(self):
         super().__init__()
@@ -34,7 +35,6 @@ class AuthorizationDialog(QtWidgets.QDialog):
             if self.login.newInput.text() == user['username'] and self.password.newInput.text() == user['password']:
                 self.user = User(self.login.newInput.text(), self.password.newInput.text())
                 self.close()
-        print("Wrong Password")
 
     def signUpButtonPush(self):
         sign_up = SignUpDialog()
