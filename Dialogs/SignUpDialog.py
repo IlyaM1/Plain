@@ -33,5 +33,5 @@ class SignUpDialog(QtWidgets.QDialog):
             }
             new_user_id = self.db.User.User.insert_one(new_user)
             # self.db.User.createCollection(new_user['username'])
-            self.db.User[new_user['username']].insert_one({'data': '1.1.1980'})
+            self.db.User[new_user['username']].insert_one({'name': 'Data of creation user'})
             self.close()

@@ -16,6 +16,10 @@ class main_window(QtWidgets.QMainWindow):
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
         self.dict = {}
+        self.ui.listWidget.setCurrentRow(5)
+        self.allNotes = self.db.User[self.user.username].find()
+        for i in self.allNotes:
+            self.ui.listWidget.addItem(QtWidgets.QListWidgetItem(i['name']))
         self.ui.pushButton.clicked.connect(self.new_note_click)
 
     def new_note_click(self):
@@ -27,6 +31,7 @@ class main_window(QtWidgets.QMainWindow):
 
         new_note_dict = dialog.noteDict
         self.db.User[self.user.username].insert_one(new_note_dict)
+        self.ui.listWidget.addItem(QtWidgets.QListWidgetItem(new_note_dict['name']))
 
 
 app = QtWidgets.QApplication([])
