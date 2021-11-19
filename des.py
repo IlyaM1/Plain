@@ -24,6 +24,7 @@ class Ui_MainWindow(object):
         font.setPointSize(16)
         self.pushButton.setFont(font)
         self.pushButton.setObjectName("pushButton")
+        self.pushButton.setStyleSheet("QPushButton {background-color: rgb(51,122,183); color: White; border-radius: 30px;}")
         self.listWidget = QtWidgets.QListWidget(self.centralwidget)
         self.listWidget.setGeometry(QtCore.QRect(0, 0, 631, 621))
         self.listWidget.setObjectName("listWidget")

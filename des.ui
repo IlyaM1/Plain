@@ -29,6 +29,10 @@
       <pointsize>16</pointsize>
      </font>
     </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(2, 82, 255);
+border-radius: 90;</string>
+    </property>
     <property name="text">
      <string>Новая запись</string>
     </property>
@@ -50,7 +54,7 @@
      <x>0</x>
      <y>0</y>
      <width>624</width>
-     <height>20</height>
+     <height>22</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuPlain">
