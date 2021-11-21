@@ -47,6 +47,8 @@ class main_window(QtWidgets.QMainWindow):
         for i in self.allNotes:
             if i['name'] == item.text():
                 needed_note = i
+
+        # self.db.User[self.user.username].deleteMany({})
         dialog = noteViewDialog(needed_note, self.user)
 
         dialog.show()

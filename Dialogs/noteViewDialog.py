@@ -8,12 +8,14 @@ from PyQt5.QtWidgets import QMessageBox
 class noteViewDialog(QtWidgets.QDialog):
     def __init__(self, note, user):
         super().__init__()
+        # self.db.User[self.user.username].deleteMany({})
         self.title = 'Тест'
         self.resize(400, 400)
         self.setFont(QtGui.QFont('Times', 13))
         self.layout = QtWidgets.QVBoxLayout()
         self.noteDict = note
         self.amountOfRows = 1
+        self.id = note['_id']
         self.user = user
         # print(self.noteDict)
 
@@ -49,17 +51,11 @@ class noteViewDialog(QtWidgets.QDialog):
         self.amountOfRows += 1
 
     def save_note(self):
-        # name_text = self.nameLayout.newInput.text()
-        # if not name_text or name_text == '':
-        #     noteViewDialog.__show_empty_message_error()
-        # else:
-        #     self.noteDict["name"] = name_text
-        k = 0
-        # print('list of inputs: ', self.list_of_inputs)
+        self.noteDict['name'] = self.nameLayout.newLabelContent.text()
         for i in self.list_of_inputs:
-            print(self.noteDict)
-            if i.newLabelContent.text() != self.noteDict[i.newLabelName.text()]:
-                self.db.User[self.user.username].replaceOne({'name': self.noteDict['name']}, self.noteDict)
+            self.noteDict[i.newLabelName.text()] = i.newLabelContent.text()
+        print(self.noteDict)
+        self.db.User[self.user.username].replaceOne({'_id': self.id}, self.noteDict)
         self.close()
 
     @staticmethod
