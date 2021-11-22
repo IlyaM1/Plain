@@ -3,7 +3,7 @@ from Widgets.NewRow import NewRow
 from Database import Database
 from Dialogs.SignUpDialog import SignUpDialog
 from Structures.User import User
-
+from Dialogs.ErrorDialog import ErrorDialog
 
 class AuthorizationDialog(QtWidgets.QDialog):
     def __init__(self):
@@ -31,12 +31,20 @@ class AuthorizationDialog(QtWidgets.QDialog):
 
     def logInButtonPush(self):
         all_users = self.db.User.User.find()
-        for user in all_users:
-            if self.login.newInput.text() == user['username'] and self.password.newInput.text() == user['password']:
-                self.user = User(self.login.newInput.text(), self.password.newInput.text())
-                self.close()
+        user_correct = False
+        try:
+            for user in all_users:
+                if self.login.newInput.text() == user['username'] and self.password.newInput.text() == user['password']:
+                    user_correct = True
+                    self.user = User(self.login.newInput.text(), self.password.newInput.text())
+                    self.close()
+            if not user_correct:
+                raise ValueError
+        except ValueError:
+            ErrorDialog('Wrong username or password')
 
-    def signUpButtonPush(self):
+    @staticmethod
+    def signUpButtonPush():
         sign_up = SignUpDialog()
         sign_up.show()
         sign_up.exec()

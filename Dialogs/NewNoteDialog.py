@@ -3,6 +3,7 @@ from Widgets.NewRow import NewRow
 from Dialogs.NewRowDialog import NewRowDialog
 from Widgets.NewRowContent import NewRowContent
 from PyQt5.QtWidgets import QMessageBox
+from Dialogs.ErrorDialog import ErrorDialog
 
 
 class NewNoteDialog(QtWidgets.QDialog):
@@ -40,19 +41,16 @@ class NewNoteDialog(QtWidgets.QDialog):
         self.amountOfRows += 1
 
     def save_note(self):
-        name_text = self.nameLayout.newInput.text()
-        if not name_text or name_text == '':
-            NewNoteDialog.__show_empty_message_error()
-        else:
-            self.noteDict["name"] = name_text
-        self.close()
-
-    @staticmethod
-    def __show_empty_message_error():
-        msgBox = QMessageBox()
-        msgBox.setIcon(QMessageBox.Information)
-        msgBox.setText("Empty name")
-        msgBox.setWindowTitle("Error")
-        msgBox.setStandardButtons(QMessageBox.Ok)
-        msgBox.show()
-        msgBox.exec()
+        print(self.noteDict)
+        try:
+            name_text = self.nameLayout.newInput.text()
+            if not name_text or name_text == '':
+                raise ValueError
+            else:
+                self.noteDict["name"] = name_text
+            # for i in self.noteDict:
+            #     if self.noteDict[i] == '' or self.noteDict[i] is None:
+            #         raise ValueError
+            self.close()
+        except ValueError:
+            ErrorDialog('Empty message')

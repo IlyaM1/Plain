@@ -5,6 +5,7 @@ from Widgets.NewRowContent import NewRowContent
 from PyQt5.QtWidgets import QMessageBox
 from Database import Database
 
+
 class noteViewDialog(QtWidgets.QDialog):
     def __init__(self, note, user):
         super().__init__()
@@ -18,7 +19,6 @@ class noteViewDialog(QtWidgets.QDialog):
         self.amountOfRows = 1
         self.id = note['_id']
         self.user = user
-        # print(self.noteDict)
 
         self.nameLayout = NewRowContent("Name", self.noteDict['name'])
         self.layout.addLayout(self.nameLayout)
@@ -55,23 +55,9 @@ class noteViewDialog(QtWidgets.QDialog):
         self.noteDict['name'] = self.nameLayout.newLabelContent.text()
         for i in self.list_of_inputs:
             self.noteDict[i.newLabelName.text()] = i.newLabelContent.text()
-        # print(self.noteDict)
         try:
-            # print(self.id)
-            # print('Finded document: ', self.db.User[self.user.username].find({'_id': self.id})[0])
             smt = self.db.User[self.user.username].find_one_and_replace({'_id': self.id}, self.noteDict)
-            print(smt)
         except:
             print("Error")
         finally:
             self.close()
-
-    @staticmethod
-    def __show_empty_message_error():
-        msgBox = QMessageBox()
-        msgBox.setIcon(QMessageBox.Information)
-        msgBox.setText("Empty name")
-        msgBox.setWindowTitle("Error")
-        msgBox.setStandardButtons(QMessageBox.Ok)
-        msgBox.show()
-        msgBox.exec()
