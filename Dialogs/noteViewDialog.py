@@ -3,12 +3,13 @@ from Widgets.NewRow import NewRow
 from Dialogs.NewRowDialog import NewRowDialog
 from Widgets.NewRowContent import NewRowContent
 from PyQt5.QtWidgets import QMessageBox
-
+from Database import Database
 
 class noteViewDialog(QtWidgets.QDialog):
     def __init__(self, note, user):
         super().__init__()
         # self.db.User[self.user.username].deleteMany({})
+        self.db = Database.get_instance()
         self.title = 'Тест'
         self.resize(400, 400)
         self.setFont(QtGui.QFont('Times', 13))
@@ -54,9 +55,16 @@ class noteViewDialog(QtWidgets.QDialog):
         self.noteDict['name'] = self.nameLayout.newLabelContent.text()
         for i in self.list_of_inputs:
             self.noteDict[i.newLabelName.text()] = i.newLabelContent.text()
-        print(self.noteDict)
-        self.db.User[self.user.username].replaceOne({'_id': self.id}, self.noteDict)
-        self.close()
+        # print(self.noteDict)
+        try:
+            # print(self.id)
+            # print('Finded document: ', self.db.User[self.user.username].find({'_id': self.id})[0])
+            smt = self.db.User[self.user.username].find_one_and_replace({'_id': self.id}, self.noteDict)
+            print(smt)
+        except:
+            print("Error")
+        finally:
+            self.close()
 
     @staticmethod
     def __show_empty_message_error():
