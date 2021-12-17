@@ -28,6 +28,8 @@ class main_window(QtWidgets.QMainWindow):
         except:
             ErrorDialog("Can't find notes")
         self.notesUpdate()
+        self.ui.listWidget.itemDoubleClicked.connect(self.slot_click_in_item)
+        self.ui.pushButton.clicked.connect(self.new_note_click)
 
     def notesUpdate(self):
         try:
@@ -38,8 +40,6 @@ class main_window(QtWidgets.QMainWindow):
         for i in self.allNotes:
             item = Item(i['name'], i)
             self.ui.listWidget.addItem(item)
-        self.ui.listWidget.itemDoubleClicked.connect(self.slot_click_in_item)
-        self.ui.pushButton.clicked.connect(self.new_note_click)
 
     def new_note_click(self):
         new_note = QtWidgets.QListWidgetItem()
@@ -57,12 +57,10 @@ class main_window(QtWidgets.QMainWindow):
         for i in self.allNotes:
             if i['_id'] == item.note['_id']:
                 needed_note = i
-
+                break
         dialog = noteViewDialog(needed_note, self.user)
-
         dialog.show()
         dialog.exec()
-
         self.notesUpdate()
 
 

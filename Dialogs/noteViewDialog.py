@@ -57,7 +57,7 @@ class noteViewDialog(QtWidgets.QDialog):
             self.noteDict[i.newLabelName.text()] = i.newLabelContent.text()
         try:
             smt = self.db.User[self.user.username].find_one_and_replace({'_id': self.id}, self.noteDict)
-        except:
-            print("Error")
+        except Exception:
+            print("Error: ", Exception)
         finally:
             self.close()
