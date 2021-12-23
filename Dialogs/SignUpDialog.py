@@ -7,7 +7,7 @@ class SignUpDialog(QtWidgets.QDialog):
     def __init__(self):
         super().__init__()
 
-        self.db = Database.get_instance()
+        # self.db = Database.get_instance()
         self.layoutAuth = QtWidgets.QVBoxLayout()
 
         self.login = NewRow("Username(will be used as login)")
@@ -31,7 +31,5 @@ class SignUpDialog(QtWidgets.QDialog):
                 'username': self.login.newInput.text(),
                 'password': self.password.newInput.text()
             }
-            new_user_id = self.db.User.User.insert_one(new_user)
-            # self.db.User.createCollection(new_user['username'])
-            self.db.User[new_user['username']].insert_one({'name': 'Data of creation user'})
+            Database.add_new_user(new_user)
             self.close()

@@ -41,16 +41,12 @@ class NewNoteDialog(QtWidgets.QDialog):
         self.amountOfRows += 1
 
     def save_note(self):
-        print(self.noteDict)
         try:
             name_text = self.nameLayout.newInput.text()
             if not name_text or name_text == '':
                 raise ValueError
             else:
                 self.noteDict["name"] = name_text
-            # for i in self.noteDict:
-            #     if self.noteDict[i] == '' or self.noteDict[i] is None:
-            #         raise ValueError
             self.close()
         except ValueError:
             ErrorDialog('Empty message')

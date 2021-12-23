@@ -5,12 +5,13 @@ from Dialogs.SignUpDialog import SignUpDialog
 from Structures.User import User
 from Dialogs.ErrorDialog import ErrorDialog
 
+
 class AuthorizationDialog(QtWidgets.QDialog):
     def __init__(self):
         super().__init__()
 
         self.user = None
-        self.db = Database.get_instance()
+        # self.db = Database.get_instance()
         self.layoutAuth = QtWidgets.QVBoxLayout()
 
         self.login = NewRow("Login")
@@ -30,7 +31,7 @@ class AuthorizationDialog(QtWidgets.QDialog):
         self.setLayout(self.layoutAuth)
 
     def logInButtonPush(self):
-        all_users = self.db.User.User.find()
+        all_users = Database.get_all_users()
         user_correct = False
         try:
             for user in all_users:
