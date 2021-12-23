@@ -15,16 +15,16 @@ class main_window(QtWidgets.QMainWindow):
     def __init__(self, user):
         super(main_window, self).__init__()
         self.user = user
-        # try:
-        #     # self.db = Database.get_instance()
-        # except:
-        #     ErrorDialog("Can't connect to Database")
+        try:
+            self.db = Database.get_instance()
+        except:
+            ErrorDialog("Can't connect to Database")
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
         self.dict = {}
         self.ui.listWidget.setCurrentRow(5)
         try:
-            self.allNotes = list(self.db.User[self.user.username].find())
+            self.allNotes = list(self.db.find_all_notes_of_user(self.user).result())
         except:
             # ErrorDialog("Can't find notes")
             pass
@@ -34,7 +34,7 @@ class main_window(QtWidgets.QMainWindow):
 
     def notesUpdate(self):
         try:
-            self.allNotes = list(Database.find_all_notes_of_user(self.user))
+            self.allNotes = list(self.db.find_all_notes_of_user(self.user).result())
         except:
             ErrorDialog("Can't find notes")
         self.ui.listWidget.clear()
@@ -50,7 +50,7 @@ class main_window(QtWidgets.QMainWindow):
         dialog.exec()
 
         new_note_dict = dialog.noteDict
-        Database.insert_one_note(self.user, new_note_dict)
+        self.db.insert_one_note(self.user, new_note_dict)
         self.notesUpdate()
 
     def slot_click_in_item(self, item):
@@ -66,7 +66,6 @@ class main_window(QtWidgets.QMainWindow):
 
 
 app = QtWidgets.QApplication([])
-Database.get_instance()
 auth = AuthorizationDialog()
 auth.show()
 auth.exec()

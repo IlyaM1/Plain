@@ -10,7 +10,7 @@ class noteViewDialog(QtWidgets.QDialog):
     def __init__(self, note, user):
         super().__init__()
         # self.db.User[self.user.username].deleteMany({})
-        # self.db = Database.get_instance()
+        self.db = Database.get_instance()
         self.title = 'Тест'
         self.resize(400, 400)
         self.setFont(QtGui.QFont('Times', 13))
@@ -56,7 +56,7 @@ class noteViewDialog(QtWidgets.QDialog):
         for i in self.list_of_inputs:
             self.noteDict[i.newLabelName.text()] = i.newLabelContent.text()
         try:
-            Database.replace_one_note(self.user, self.id, self.noteDict)
+            self.db.replace_one_note(self.user, self.id, self.noteDict)
         except Exception:
             print("Error: ", Exception)
         finally:
