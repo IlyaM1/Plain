@@ -9,7 +9,7 @@ from Dialogs.ErrorDialog import ErrorDialog
 class NewNoteDialog(QtWidgets.QDialog):
     def __init__(self):
         super().__init__()
-        self.title = 'Тест'
+        self.setWindowTitle('Новая запись')
         self.resize(400, 400)
         self.setFont(QtGui.QFont('Times', 13))
         self.layout = QtWidgets.QVBoxLayout()

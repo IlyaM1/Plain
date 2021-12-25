@@ -8,7 +8,7 @@ from Database import Database
 class noteViewDialog(QtWidgets.QDialog):
     def __init__(self, note, user, window):
         super().__init__()
-        # self.db.User[self.user.username].deleteMany({})
+        self.setWindowTitle('Обновление записи')
         self.db = Database.get_instance()
         self.title = 'Тест'
         self.resize(400, 400)

@@ -9,7 +9,7 @@ from Dialogs.ErrorDialog import ErrorDialog
 class AuthorizationDialog(QtWidgets.QDialog):
     def __init__(self):
         super().__init__()
-
+        self.setWindowTitle('Авторизация')
         self.user = None
         self.db = Database.get_instance()
         self.layoutAuth = QtWidgets.QVBoxLayout()

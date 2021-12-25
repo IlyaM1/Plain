@@ -22,6 +22,7 @@ class main_window(QtWidgets.QMainWindow):
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
         self.dict = {}
+        self.setWindowTitle('Plain')
         self.ui.listWidget.setCurrentRow(5)
         try:
             self.allNotes = list(self.db.find_all_notes_of_user(self.user).result())
