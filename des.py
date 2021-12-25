@@ -14,7 +14,9 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(624, 696)
+        MainWindow.resize(629, 698)
+        MainWindow.setStyleSheet("background-color: rgb(130, 64, 205);\n"
+"")
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.pushButton = QtWidgets.QPushButton(self.centralwidget)
@@ -23,14 +25,17 @@ class Ui_MainWindow(object):
         font.setFamily("Microsoft YaHei UI")
         font.setPointSize(16)
         self.pushButton.setFont(font)
+        self.pushButton.setStyleSheet("background-color: rgb(130, 64, 205);\n"
+"border-radius: 90;")
         self.pushButton.setObjectName("pushButton")
-        self.pushButton.setStyleSheet("QPushButton {background-color: rgb(51,122,183); color: White; border-radius: 30px;}")
         self.listWidget = QtWidgets.QListWidget(self.centralwidget)
         self.listWidget.setGeometry(QtCore.QRect(0, 0, 631, 621))
+        self.listWidget.setStyleSheet("background-color: rgb(153, 151, 244);\n"
+"")
         self.listWidget.setObjectName("listWidget")
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(MainWindow)
-        self.menubar.setGeometry(QtCore.QRect(0, 0, 624, 20))
+        self.menubar.setGeometry(QtCore.QRect(0, 0, 629, 21))
         self.menubar.setObjectName("menubar")
         self.menuPlain = QtWidgets.QMenu(self.menubar)
         self.menuPlain.setObjectName("menuPlain")
@@ -40,6 +45,8 @@ class Ui_MainWindow(object):
         self.menu_2.setObjectName("menu_2")
         MainWindow.setMenuBar(self.menubar)
         self.statusbar = QtWidgets.QStatusBar(MainWindow)
+        self.statusbar.setStyleSheet("background-color: rgb(130, 64, 205);\n"
+"")
         self.statusbar.setObjectName("statusbar")
         MainWindow.setStatusBar(self.statusbar)
         self.menubar.addAction(self.menuPlain.menuAction())
@@ -56,5 +63,3 @@ class Ui_MainWindow(object):
         self.menuPlain.setTitle(_translate("MainWindow", "Файл"))
         self.menu.setTitle(_translate("MainWindow", "Настройки"))
         self.menu_2.setTitle(_translate("MainWindow", "О приложении"))
-
-

@@ -10,7 +10,7 @@ from Dialogs.noteViewDialog import noteViewDialog
 from Structures.Item import Item
 from Dialogs.ErrorDialog import ErrorDialog
 
-
+# pyuic5 des.ui -o des.py
 class main_window(QtWidgets.QMainWindow):
     def __init__(self, user):
         super(main_window, self).__init__()
