@@ -5,9 +5,8 @@ from Widgets.NewRowContent import NewRowContent
 from PyQt5.QtWidgets import QMessageBox
 from Database import Database
 
-
 class noteViewDialog(QtWidgets.QDialog):
-    def __init__(self, note, user):
+    def __init__(self, note, user, window):
         super().__init__()
         # self.db.User[self.user.username].deleteMany({})
         self.db = Database.get_instance()
@@ -19,6 +18,8 @@ class noteViewDialog(QtWidgets.QDialog):
         self.amountOfRows = 1
         self.id = note['_id']
         self.user = user
+        self.window = window
+        self.endedEditing = False
 
         self.nameLayout = NewRowContent("Name", self.noteDict['name'])
         self.layout.addLayout(self.nameLayout)
@@ -56,8 +57,12 @@ class noteViewDialog(QtWidgets.QDialog):
         for i in self.list_of_inputs:
             self.noteDict[i.newLabelName.text()] = i.newLabelContent.text()
         try:
-            self.db.replace_one_note(self.user, self.id, self.noteDict)
+            # self.db.replace_one_note(self.user, self.id, self.noteDict).add_done_callback(self.window.notesUpdate)
+            self.db.replace_one_note(self.user, self.id, self.noteDict, self.window)
         except Exception:
             print("Error: ", Exception)
         finally:
             self.close()
+    #
+    # def change_state_endedEditing(self):
+    #     self.endedEditing = True

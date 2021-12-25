@@ -50,7 +50,7 @@ class main_window(QtWidgets.QMainWindow):
         dialog.exec()
 
         new_note_dict = dialog.noteDict
-        self.db.insert_one_note(self.user, new_note_dict)
+        self.db.insert_one_note(self.user, new_note_dict, self)
         self.notesUpdate()
 
     def slot_click_in_item(self, item):
@@ -59,7 +59,7 @@ class main_window(QtWidgets.QMainWindow):
             if i['_id'] == item.note['_id']:
                 needed_note = i
                 break
-        dialog = noteViewDialog(needed_note, self.user)
+        dialog = noteViewDialog(needed_note, self.user, self)
         dialog.show()
         dialog.exec()
         self.notesUpdate()
