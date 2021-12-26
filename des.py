@@ -14,23 +14,24 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(629, 698)
-        MainWindow.setStyleSheet("background-color: rgb(130, 64, 205);\n"
+        MainWindow.resize(629, 689)
+        MainWindow.setStyleSheet("//background-color: rgb(130, 64, 205);\n"
 "")
+        MainWindow.setDocumentMode(True)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.pushButton = QtWidgets.QPushButton(self.centralwidget)
         self.pushButton.setGeometry(QtCore.QRect(-10, 620, 641, 51))
         font = QtGui.QFont()
-        font.setFamily("Microsoft YaHei UI")
-        font.setPointSize(16)
+        font.setFamily("Times New Roman")
+        font.setPointSize(18)
         self.pushButton.setFont(font)
-        self.pushButton.setStyleSheet("background-color: rgb(130, 64, 205);\n"
+        self.pushButton.setStyleSheet("//background-color: rgb(130, 64, 205);\n"
 "border-radius: 90;")
         self.pushButton.setObjectName("pushButton")
         self.listWidget = QtWidgets.QListWidget(self.centralwidget)
         self.listWidget.setGeometry(QtCore.QRect(0, 0, 631, 621))
-        self.listWidget.setStyleSheet("background-color: rgb(153, 151, 244);\n"
+        self.listWidget.setStyleSheet("//background-color: rgb(153, 151, 244);\n"
 "")
         self.listWidget.setObjectName("listWidget")
         MainWindow.setCentralWidget(self.centralwidget)
@@ -44,11 +45,6 @@ class Ui_MainWindow(object):
         self.menu_2 = QtWidgets.QMenu(self.menubar)
         self.menu_2.setObjectName("menu_2")
         MainWindow.setMenuBar(self.menubar)
-        self.statusbar = QtWidgets.QStatusBar(MainWindow)
-        self.statusbar.setStyleSheet("background-color: rgb(130, 64, 205);\n"
-"")
-        self.statusbar.setObjectName("statusbar")
-        MainWindow.setStatusBar(self.statusbar)
         self.menubar.addAction(self.menuPlain.menuAction())
         self.menubar.addAction(self.menu.menuAction())
         self.menubar.addAction(self.menu_2.menuAction())

@@ -4,6 +4,7 @@ from Dialogs.NewRowDialog import NewRowDialog
 from Widgets.NewRowContent import NewRowContent
 from PyQt5.QtWidgets import QMessageBox
 from Dialogs.ErrorDialog import ErrorDialog
+from PyQt5.QtGui import QIcon
 
 
 class NewNoteDialog(QtWidgets.QDialog):
@@ -12,6 +13,7 @@ class NewNoteDialog(QtWidgets.QDialog):
         self.setWindowTitle('Новая запись')
         self.resize(400, 400)
         self.setFont(QtGui.QFont('Times', 13))
+        self.setWindowIcon(QIcon('icon.png'))
         self.layout = QtWidgets.QVBoxLayout()
         self.noteDict = {"name": ""}
         self.amountOfRows = 1

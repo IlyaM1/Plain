@@ -1,6 +1,8 @@
 import sys
 
-from PyQt5 import QtWidgets, QtGui, QtCore, Qt
+from PyQt5 import QtWidgets
+from PyQt5.QtWidgets import QStyleFactory
+from PyQt5.QtGui import QIcon
 from des import Ui_MainWindow
 
 from Database import Database
@@ -10,11 +12,18 @@ from Dialogs.noteViewDialog import noteViewDialog
 from Structures.Item import Item
 from Dialogs.ErrorDialog import ErrorDialog
 
+
 # pyuic5 des.ui -o des.py
+# ['windowsvista', 'Windows', 'Fusion']
 class main_window(QtWidgets.QMainWindow):
     def __init__(self, user):
         super(main_window, self).__init__()
         self.user = user
+        self.setWindowIcon(QIcon('icon.png'))
+        self.setStyle(QStyleFactory().create("Fusion"))
+        self.setFixedSize(629, 698)
+        # self.setStatusBar(None)
+        self.theme = 'Light'
         try:
             self.db = Database.get_instance()
         except:

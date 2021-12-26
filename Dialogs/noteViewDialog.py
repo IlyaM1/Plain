@@ -5,6 +5,7 @@ from Widgets.NewRowContent import NewRowContent
 from PyQt5.QtWidgets import QMessageBox
 from Database import Database
 
+
 class noteViewDialog(QtWidgets.QDialog):
     def __init__(self, note, user, window):
         super().__init__()
@@ -13,6 +14,7 @@ class noteViewDialog(QtWidgets.QDialog):
         self.title = 'Тест'
         self.resize(400, 400)
         self.setFont(QtGui.QFont('Times', 13))
+        self.setWindowIcon(QtGui.QIcon('icon.png'))
         self.layout = QtWidgets.QVBoxLayout()
         self.noteDict = note
         self.amountOfRows = 1

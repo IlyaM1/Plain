@@ -4,12 +4,14 @@ from Database import Database
 from Dialogs.SignUpDialog import SignUpDialog
 from Structures.User import User
 from Dialogs.ErrorDialog import ErrorDialog
-
+from PyQt5.QtGui import QFont, QIcon
 
 class AuthorizationDialog(QtWidgets.QDialog):
     def __init__(self):
         super().__init__()
         self.setWindowTitle('Авторизация')
+        self.setFont(QFont("Times", 10))
+        self.setWindowIcon(QIcon('icon.png'))
         self.user = None
         self.db = Database.get_instance()
         self.layoutAuth = QtWidgets.QVBoxLayout()
